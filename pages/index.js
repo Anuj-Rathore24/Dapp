@@ -3,17 +3,21 @@ import Image from 'next/image'
 import {useEffect, useState} from 'react'
 import styles from '../styles/Home.module.css'
 import Web3 from 'web3'
-// import { useState } from 'react/cjs/react.production.min'
+import "bootstrap/dist/css/bootstrap.css"
+import {Button} from 'react-bootstrap'
 
 export default function Home() {
   const [web3, setWeb3]=useState(null);
   const [address,setAddress]=useState(null);
-  useEffect(() => {
+  function func(){
     window.ethereum ? ethereum.request({method:"eth_requestAccounts"}).then((accounts)=>{setAddress(accounts[0])
-    let w3=new Web3(ethereum)
-    setWeb3(w3)
-    }).catch((err)=>console.log(err))
-    :console.log("please install metamask")
+      let w3=new Web3(ethereum)
+      setWeb3(w3)
+      }).catch((err)=>console.log(err))
+      :alert("please install metamask")
+  }
+  useEffect(() => {
+    
   }, [])
   
   return (
@@ -28,10 +32,10 @@ export default function Home() {
         <h1 className={styles.title}>
           Home Page
         </h1>
-        
         <p className={styles.description}>
           connect your meta mask wallet 
         </p>
+        <Button onClick={func()}>Connect</Button>
       </main>
 
       <footer className={styles.footer}>
